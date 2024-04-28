@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 function build_calendar($month, $year) {
     $mysqli = new mysqli('localhost', 'root', '', 'bookingcalendar');
     $stmt = $mysqli->prepare("select * from bookings where MONTH(date) = ? AND YEAR(date) = ?");
@@ -107,7 +107,6 @@ function build_calendar($month, $year) {
             
             
            
-            
           $calendar .="</td>";
           // Increment counters
  
@@ -244,8 +243,22 @@ function build_calendar($month, $year) {
             background:yellow;
         }
         
-        
-        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('path/to/your/blur-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.5); /* Adjust alpha transparency as needed */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
     </style>
 </head>
 
@@ -269,4 +282,4 @@ function build_calendar($month, $year) {
     </div>
 </body>
 
-</html>
+</html> -->

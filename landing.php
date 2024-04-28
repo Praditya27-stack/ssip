@@ -40,7 +40,7 @@
                     <p class="reserve__text">Click The button👇bellow to make a reservation</p>
 
                     <div class="reserve__button">
-                        <a href="#" class="reserve__button-link">Reservation</a>
+                        <a href="calendar.php" class="reserve__button-link">Reservation</a>
                         </div>
                 </div>
             </div>

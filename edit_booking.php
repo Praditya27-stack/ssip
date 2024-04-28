@@ -8,7 +8,6 @@
 <body>
 
     <?php
-    // Database connection
     $host = 'localhost';
     $username = 'root';
     $password = '';
@@ -35,7 +34,6 @@
         }
     }
 
-    // Retrieve booking data based on ID
     if (isset($_GET['id'])) {
         $booking_id = $_GET['id'];
         $sql = "SELECT id, booking_date, booking_time, booking_name FROM bookings WHERE id='$booking_id'";
