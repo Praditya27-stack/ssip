@@ -24,32 +24,48 @@
             border-radius: 10px;
         }
 
+        .booking-form input[type="date"], 
+.booking-form input[type="time"], 
+.booking-form input[type="text"] {
+    background-color: #25b3ff; /* Warna latar belakang */
+    border: none; /* Tanpa border */
+    color: white; /* Warna teks */
+    padding: 10px 20px; /* Padding */
+    text-align: center; /* Teks di tengah */
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px; /* Ukuran teks */
+    border-radius: 5px; /* Border radius */
+}
+
         .booking-form {
             position: absolute;
             top: 10%;
             left: 50%;
             transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Montserrat', sans-serif; /* Mengubah jenis font */
         }
 
         .booking-schedule {
             position: absolute;
-            top: 35%;
+            top: 45%;
             left: 50%;
             transform: translateX(-50%);
-
+            font-family: 'Montserrat', sans-serif;
+        }
 
         .booking-schedule h3 {
             position: absolute;
-            top: 0;
-            left: 50%;
+            top: -50px;
+            left: 50px;
             transform: translateX(-50%);
-        }
-        
-
+            font-family: 'Montserrat', sans-serif; /* Mengubah jenis font */
         }
 
         body {
-            background-color: #add8e6;
+            background-color: rgb(0, 140, 255);
+            color: white; /* Menjadikan semua teks putih */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -62,6 +78,19 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
+
+        .booking-form input[type="submit"] {
+            background-color: #25b3ff; /* Warna latar belakang */
+            border: none; /* Tanpa border */
+            color: white; /* Warna teks */
+            padding: 10px 20px; /* Padding */
+            text-align: center; /* Teks di tengah */
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px; /* Ukuran teks */
+            border-radius: 5px; /* Border radius */
+        }
+
     </style>
 </head>
 
