@@ -1,11 +1,14 @@
 <?php
 include "database.php";
+session_start();
 
 if (isset($_POST["reserveBtn"])) {
-    if (isset($_SESSION["is_login"])) {
+    if (isset($_SESSION["is_login"]) && $_SESSION["is_login"] == true) {
         header("location:calendar.php");
+        exit;
     } else {
         header("location:submit-login.php");
+        exit;
     }
 }
 
