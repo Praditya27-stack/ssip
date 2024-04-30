@@ -2,9 +2,123 @@
 <html>
 
 <head>
-
     <title>Booking Calendar</title>
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap");
+
+
+        :root {
+            --header-height: 3rem;
+            --font-medium: 500;
+        }
+
+
+        :root {
+            --first-color: rgb(0, 140, 255);
+            --white-color: rgb(255, 255, 255);
+            --dark-color: #13232e;
+            --text-color: rgb(150, 150, 150);
+        }
+
+
+        :root {
+            --body-font: 'Montserrat', sans-serif;
+            --big-font-size: 6.25rem;
+            --h2-font-size: 1.25rem;
+            --normal-font-size: .938rem;
+            --small-font-size: .813rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            :root {
+                --big-font-size: 9rem;
+                --h2-font-size: 2rem;
+                --normal-font-size: 1rem;
+                --small-font-size: .875rem;
+            }
+        }
+
+
+        :root {
+            --mb-1: .5rem;
+            --mb-2: 1rem;
+            --mb-3: 1.5rem;
+            --mb-4: 2rem;
+        }
+
+
+        :root {
+            --z-fixed: 100;
+        }
+
+        .bd-grid {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-column-gap: 2rem;
+            width: calc(100% - 2rem);
+            margin-left: var(--mb-2);
+            margin-right: var(--mb-2);
+        }
+
+        .l-header {
+            width: 100%;
+            height: 85px;
+            position: relative;
+            top: -80%;
+            left: 50%;
+            z-index: var(--z-fixed);
+            background-color: var(--first-color);
+
+        }
+        
+
+
+        .nav {
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        @media screen and (max-width: 768px) {
+            .nav__home {
+                position: relative;
+                top: var(--header-height);
+                right: -100%;
+                width: 100%;
+                height: 100%;
+                padding: 2rem;
+                background-color: rgba(255, 255, 255, .3);
+                transition: .5s;
+                backdrop-filter: blur(10px);
+            }
+        }
+
+        .nav__item {
+            margin-bottom: var(--mb-4);
+        }
+
+        .nav__link {
+            position: relative;
+            color: var(--dark-color);
+        }
+
+        .nav__link:hover {
+            color: var(--first-color);
+        }
+
+        .nav__logo {
+            color: var(--white-color);
+        }
+
+        .nav__toggle {
+            color: var(--white-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+
         .calendar {
             width: 400px;
             border-collapse: collapse;
@@ -24,19 +138,19 @@
             border-radius: 10px;
         }
 
-        .booking-form input[type="date"], 
-.booking-form input[type="time"], 
-.booking-form input[type="text"] {
-    background-color: #25b3ff; /* Warna latar belakang */
-    border: none; /* Tanpa border */
-    color: white; /* Warna teks */
-    padding: 10px 20px; /* Padding */
-    text-align: center; /* Teks di tengah */
-    text-decoration: none;
-    display: inline-block;
-    font-size: 10px; /* Ukuran teks */
-    border-radius: 5px; /* Border radius */
-}
+        .booking-form input[type="date"],
+        .booking-form input[type="time"],
+        .booking-form input[type="text"] {
+            background-color: #ffffff;
+            border: none;
+            color: black;
+            padding: 7px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 10px;
+            border-radius: 5px;
+        }
 
         .booking-form {
             position: absolute;
@@ -44,7 +158,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: white;
-            font-family: 'Montserrat', sans-serif; /* Mengubah jenis font */
+            font-family: 'Montserrat', sans-serif;
         }
 
         .booking-schedule {
@@ -60,15 +174,16 @@
             top: -50px;
             left: 50px;
             transform: translateX(-50%);
-            font-family: 'Montserrat', sans-serif; /* Mengubah jenis font */
+            font-family: 'Montserrat', sans-serif;
         }
 
         body {
-            background-color: rgb(0, 140, 255);
-            color: white; /* Menjadikan semua teks putih */
+            background-color: grey;
+            color: white;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 100vh;
             height: 500px;
             width: 500px;
             border-radius: 10px;
@@ -80,21 +195,51 @@
         }
 
         .booking-form input[type="submit"] {
-            background-color: #25b3ff; /* Warna latar belakang */
-            border: none; /* Tanpa border */
-            color: white; /* Warna teks */
-            padding: 10px 20px; /* Padding */
-            text-align: center; /* Teks di tengah */
+            background-color: #25b3ff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 10px; /* Ukuran teks */
-            border-radius: 5px; /* Border radius */
-        }
+            font-size: 10px;
+            border-radius: 5px;
 
+        }
     </style>
 </head>
 
 <body>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+                <a href="#" class="nav__logo">Radatouli</a>
+            </div>
+
+            <div class="nav__home" id="nav-home">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="#home" class="nav__link active">home</a></li>
+                    <li class="nav__item"><a href="#reserve" class="nav__link">Reserve</a></li>
+                    <li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>
+                    <?php
+                    // session_start();
+                    if (isset($_SESSION['username'])) {
+                        // Jika sudah login, tampilkan tautan Logout
+                        echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
+                    } else {
+                        // Jika belum login, tampilkan tautan Login
+                        echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Login</a></li>';
+                    }
+                    ?>
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-home'></i>
+            </div>
+        </nav>
+    </header>
+
     <?php
     // include "database.php"
     // Database connection
@@ -118,7 +263,6 @@
                 $booking_time = $_POST['booking_time'];
                 $booking_name = $_POST['booking_name'];
 
-                // Check if there is already a booking with the same name on the same date
                 $sql = "SELECT COUNT(*) AS total_bookings FROM bookings WHERE booking_date='$booking_date' AND booking_name='$booking_name'";
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
@@ -127,7 +271,6 @@
                 if ($total_bookings > 0) {
                     $msg = "<p>This name is already in that date.</p>";
                 } else {
-                    // Check if there are already 3 bookings at the same time
                     $sql = "SELECT COUNT(*) AS total_bookings FROM bookings WHERE booking_date='$booking_date' AND booking_time='$booking_time'";
                     $result = $conn->query($sql);
                     $row = $result->fetch_assoc();
@@ -220,5 +363,7 @@
     </table>
 
 </body>
+
+</html>
 
 </html>
