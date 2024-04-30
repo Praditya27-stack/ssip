@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu List</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-    <?php
-        include "database.php";
-        $result = mysqli_query($db, "
-            SELECT dish_id, dish_name, price, AVG(price) as avg_price
-            FROM menu
-            GROUP BY dish_id
-            HAVING avg_price > (
-                SELECT AVG(price)
-                FROM menu
-            )
-        ");
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-            echo "<td>". $row["dish_id"]. "</td>";
-            echo "<td>". $row["dish_name"]. "</td>";
-            echo "<td>". $row["price"]. "</td>";
-            echo "<td>". $row["avg_price"]. "</td>";
-            echo "</tr>";
-        }
-    ?>
-</body>
-</html>
+<?php
+
+include "database.php";
+include "layout/header.php";
+// Fetch menu items sorted by category
+$query = "SELECT * FROM menu ORDER BY category";
+$result = mysqli_query($db, $query);
+
+// Check if there are any menu items
+if (mysqli_num_rows($result) > 0) {
+    // Start the HTML table and wrap it in a div for center alignment and positioning
+    echo "<div style='text-align: center; margin-top: 100px;'>"; // Adjust the margin-top as needed
+    echo "<table border='1' style='margin-left: auto; margin-right: auto;'>";
+    echo "<tr><th>Menu ID</th><th>Menu Name</th><th>Price</th><th>Description</th><th>Category</th></tr>";
+
+    // Output each menu item as a table row
+    while ($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        echo "<td>" . $row["dish_id"] . "</td>";
+        echo "<td>" . $row["dish_name"] . "</td>";
+        echo "<td>$" . $row["price"] . "</td>";
+        echo "<td>" . $row["description"] . "</td>";
+        echo "<td>" . $row["category"] . "</td>";
+        echo "</tr>";
+    }
+
+    // End the HTML table and the div
+    echo "</table>";
+    echo "</div>";
+} else {
+    echo "No menu items found.";
+}
+
+mysqli_close($db);
+?>
