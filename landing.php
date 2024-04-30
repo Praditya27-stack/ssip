@@ -1,3 +1,20 @@
+<?php
+include "database.php";
+session_start();
+
+if (isset($_POST["reserveBtn"])) {
+    if (isset($_SESSION["is_login"]) && $_SESSION["is_login"] == true) {
+        header("location:calendar.php");
+        exit;
+    } else {
+        header("location:submit-login.php");
+        exit;
+    }
+}
+
+?>
+
+
 <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -40,7 +57,10 @@
                     <p class="reserve__text">Click The button👇bellow to make a reservation</p>
 
                     <div class="reserve__button">
-                        <a href="calendar.php" class="reserve__button-link">Reservation</a>
+                        <!-- <a href="calendar.php" class="reserve__button-link">Reservation</a> -->
+                        <form action="landing.php" method="post">
+                            <input type="submit" name="reserveBtn" value="Reservation" class="reserve__button-link">    
+                        </form>
                         </div>
                 </div>
             </div>

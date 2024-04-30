@@ -25,7 +25,7 @@
                     <li class="nav__item"><a href="#reserve" class="nav__link">Reserve</a></li>
                     <li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>
                     <?php
-                    session_start();
+                    // session_start();
                     if(isset($_SESSION['username'])) {
                         // Jika sudah login, tampilkan tautan Logout
                         echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
