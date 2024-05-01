@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Booking Calendar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap");
 
@@ -38,7 +41,6 @@
             }
         }
 
-
         :root {
             --mb-1: .5rem;
             --mb-2: 1rem;
@@ -51,7 +53,58 @@
             --z-fixed: 100;
         }
 
+
+        *,
+        ::before,
+        ::after {
+            box-sizing: menu-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: var(--header-height) 0 0 0;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            font-weight: var(--font-medium);
+            color: var(--text-color);
+            line-height: 1.6;
+
+        }
+
+        h1,
+        h2,
+        p {
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /*===== CLASS CSS ===== */
+        .section {
+            padding: 3rem 0;
+        }
+
+
         .bd-grid {
+            max-width: 1024px;
             display: grid;
             grid-template-columns: 100%;
             grid-column-gap: 2rem;
@@ -60,17 +113,28 @@
             margin-right: var(--mb-2);
         }
 
+
         .l-header {
             width: 100%;
-            height: 85px;
-            position: relative;
-            top: -80%;
-            left: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
             z-index: var(--z-fixed);
             background-color: var(--first-color);
-
+            display: flex;
+            justify-content: center;
         }
-        
+
+
+        .active::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: .18rem;
+            left: 0;
+            top: 2rem;
+            background-color: var(--first-color);
+        }
 
 
         .nav {
@@ -78,15 +142,15 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-direction: row;
         }
+
 
         @media screen and (max-width: 768px) {
             .nav__home {
-                position: relative;
+                position: fixed;
                 top: var(--header-height);
                 right: -100%;
-                width: 100%;
+                width: 80%;
                 height: 100%;
                 padding: 2rem;
                 background-color: rgba(255, 255, 255, .3);
@@ -117,11 +181,56 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-        
+
+
+        /* ===== MEDIA QUERIES =====*/
+        @media screen and (min-width: 768px) {
+
+            body {
+                margin: 0;
+            }
+
+
+            .nav {
+                height: calc(var(--header-height) + 1rem);
+            }
+
+            .nav__list {
+                display: flex;
+            }
+
+            .nav__item {
+                margin-left: var(--mb-4);
+                margin-bottom: 0;
+            }
+
+            .nav__toggle {
+                display: none;
+            }
+
+            .nav__link {
+                color: var(--white-color);
+            }
+
+            .nav__link:hover {
+                color: var(--white-color);
+            }
+
+            .active::after {
+                background-color: var(--white-color);
+            }
+        }
 
         .calendar {
             width: 400px;
             border-collapse: collapse;
+            position: relative;
+            top: 120px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-items: center;
         }
 
         .calendar td {
@@ -138,73 +247,22 @@
             border-radius: 10px;
         }
 
-        .booking-form input[type="date"],
-        .booking-form input[type="time"],
-        .booking-form input[type="text"] {
-            background-color: #ffffff;
-            border: none;
-            color: black;
-            padding: 7px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 10px;
-            border-radius: 5px;
-        }
+        .booking-schedule h3 {
+            position: relative;
+            top: 120px;
+            left: 600px;
+    font-family: 'Montserrat', sans-serif;
+}
+
 
         .booking-form {
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .booking-schedule {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .booking-schedule h3 {
-            position: absolute;
-            top: -50px;
-            left: 50px;
-            transform: translateX(-50%);
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        body {
-            background-color: grey;
-            color: white;
+            position: relative;
+            top: 120px;
+            width: 100%;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            min-height: 100vh;
-            height: 500px;
-            width: 500px;
-            border-radius: 10px;
-            margin: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .booking-form input[type="submit"] {
-            background-color: #25b3ff;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 10px;
-            border-radius: 5px;
-
+            justify-items: center;
         }
     </style>
 </head>
@@ -218,8 +276,8 @@
 
             <div class="nav__home" id="nav-home">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="#home" class="nav__link active">home</a></li>
-                    <li class="nav__item"><a href="#reserve" class="nav__link">Reserve</a></li>
+                    <li class="nav__item"><a href="landing.php" class="nav__link active">home</a></li>
+                    <li class="nav__item"><a href="calendar.php" class="nav__link">Reserve</a></li>
                     <li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>
                     <?php
                     // session_start();
@@ -228,7 +286,7 @@
                         echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
                     } else {
                         // Jika belum login, tampilkan tautan Login
-                        echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Login</a></li>';
+                        echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Logout</a></li>';
                     }
                     ?>
                 </ul>
@@ -239,6 +297,7 @@
             </div>
         </nav>
     </header>
+
 
     <?php
     // include "database.php"
@@ -305,6 +364,8 @@
     }
 
     ?>
+
+
     <section class="booking-form">
         <h2>Booking Calendar</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
@@ -319,7 +380,6 @@
         </form>
         <?= $msg ?>
     </section>
-
     <section class="booking-schedule">
         <h3>Jadwal Booking</h3>
 
@@ -331,6 +391,7 @@
                 <th>Action</th>
             </tr>
     </section>
+
     <?php
     $sql = "SELECT id, booking_date, booking_time, booking_name FROM bookings";
     $result = $conn->query($sql);
@@ -361,9 +422,6 @@
     $conn->close();
     ?>
     </table>
-
 </body>
-
-</html>
 
 </html>
