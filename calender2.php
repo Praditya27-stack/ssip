@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,196 +10,249 @@
         @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap");
 
 
-:root{
-    --header-height: 3rem;
-    --font-medium: 500;
-}
+        :root {
+            --header-height: 3rem;
+            --font-medium: 500;
+        }
 
 
-:root{
-    --first-color: rgb(0, 140, 255);
-    --white-color: rgb(255, 255, 255);
-    --dark-color: #13232e;
-    --text-color: rgb(150, 150, 150);
-}
+        :root {
+            --first-color: rgb(0, 140, 255);
+            --white-color: rgb(255, 255, 255);
+            --dark-color: #13232e;
+            --text-color: rgb(150, 150, 150);
+        }
 
 
-:root{
-    --body-font: 'Montserrat', sans-serif;
-    --big-font-size: 6.25rem;
-    --h2-font-size: 1.25rem;
-    --normal-font-size: .938rem;
-    --small-font-size: .813rem;
-}
+        :root {
+            --body-font: 'Montserrat', sans-serif;
+            --big-font-size: 6.25rem;
+            --h2-font-size: 1.25rem;
+            --normal-font-size: .938rem;
+            --small-font-size: .813rem;
+        }
 
-@media screen and (min-width: 768px){
-    :root{
-        --big-font-size: 9rem;
-        --h2-font-size: 2rem;
-        --normal-font-size: 1rem;
-        --small-font-size: .875rem;
-    }
-}
+        @media screen and (min-width: 768px) {
+            :root {
+                --big-font-size: 9rem;
+                --h2-font-size: 2rem;
+                --normal-font-size: 1rem;
+                --small-font-size: .875rem;
+            }
+        }
 
-:root{
-    --mb-1: .5rem;
-    --mb-2: 1rem;
-    --mb-3: 1.5rem;
-    --mb-4: 2rem;
-}
-
-
-:root{
-    --z-fixed: 100;
-}
+        :root {
+            --mb-1: .5rem;
+            --mb-2: 1rem;
+            --mb-3: 1.5rem;
+            --mb-4: 2rem;
+        }
 
 
-*,::before,::after{
-    box-sizing: menu-box;
-}
-html{
-    scroll-behavior: smooth;
-}
-body{
-    margin: var(--header-height) 0 0 0;
-    font-family: var(--body-font);
-    font-size: var(--normal-font-size);
-    font-weight: var(--font-medium);
-    color: var(--text-color);
-    line-height: 1.6;
-    
-}
-h1,h2,p{
-    margin: 0;
-}
-ul{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-a{
-    text-decoration: none;
-    color: var(--text-color);
-}
-img{
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/*===== CLASS CSS ===== */
-.section{
-    padding: 3rem 0;
-}
+        :root {
+            --z-fixed: 100;
+        }
 
 
-.bd-grid{
-    max-width: 1024px;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-column-gap: 2rem;
-    width: calc(100% - 2rem);
-    margin-left: var(--mb-2);
-    margin-right: var(--mb-2);
+        *,
+        ::before,
+        ::after {
+            box-sizing: menu-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: var(--header-height) 0 0 0;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            font-weight: var(--font-medium);
+            color: var(--text-color);
+            line-height: 1.6;
+
+        }
+
+        h1,
+        h2,
+        p {
+            margin: 0;
+        }
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /*===== CLASS CSS ===== */
+        .section {
+            padding: 3rem 0;
+        }
+
+
+        .bd-grid {
+            max-width: 1024px;
+            display: grid;
+            grid-template-columns: 100%;
+            grid-column-gap: 2rem;
+            width: calc(100% - 2rem);
+            margin-left: var(--mb-2);
+            margin-right: var(--mb-2);
+        }
+
+
+        .l-header {
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: var(--z-fixed);
+            background-color: var(--first-color);
+            display: flex;
+            justify-content: center;
+        }
+
+
+        .active::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: .18rem;
+            left: 0;
+            top: 2rem;
+            background-color: var(--first-color);
+        }
+
+
+        .nav {
+            height: var(--header-height);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        @media screen and (max-width: 768px) {
+            .nav__home {
+                position: fixed;
+                top: var(--header-height);
+                right: -100%;
+                width: 80%;
+                height: 100%;
+                padding: 2rem;
+                background-color: rgba(255, 255, 255, .3);
+                transition: .5s;
+                backdrop-filter: blur(10px);
+            }
+        }
+
+        .nav__item {
+            margin-bottom: var(--mb-4);
+        }
+
+        .nav__link {
+            position: relative;
+            color: var(--dark-color);
+        }
+
+        .nav__link:hover {
+            color: var(--first-color);
+        }
+
+        .nav__logo {
+            color: var(--white-color);
+        }
+
+        .nav__toggle {
+            color: var(--white-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+
+        /* ===== MEDIA QUERIES =====*/
+        @media screen and (min-width: 768px) {
+
+            body {
+                margin: 0;
+            }
+
+
+            .nav {
+                height: calc(var(--header-height) + 1rem);
+            }
+
+            .nav__list {
+                display: flex;
+            }
+
+            .nav__item {
+                margin-left: var(--mb-4);
+                margin-bottom: 0;
+            }
+
+            .nav__toggle {
+                display: none;
+            }
+
+            .nav__link {
+                color: var(--white-color);
+            }
+
+            .nav__link:hover {
+                color: var(--white-color);
+            }
+
+            .active::after {
+                background-color: var(--white-color);
+            }
+        }
+
+        .calendar {
+            width: 400px;
+            border-collapse: collapse;
+            position: relative;
+            top: 120px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .calendar td {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .calendar th {
+            border: 1px solid #000;
+            padding: 5px;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .booking-schedule h3 {
+            position: relative;
+            top: 120px;
+            left: 600px;
+    font-family: 'Montserrat', sans-serif;
 }
-
-        
-.l-header{
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: var(--z-fixed);
-    background-color: var(--first-color);
-    display: flex;
-    justify-content: center;
-}
-
-
-.active::after{
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: .18rem;
-    left: 0;
-    top: 2rem;
-    background-color: var(--first-color);
-}
-
-
-.nav{
-    height: var(--header-height);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-
-@media screen and (max-width: 768px){
-    .nav__home{
-        position: fixed;
-        top: var(--header-height);
-        right: -100%;
-        width: 80%;
-        height: 100%;
-        padding: 2rem;
-        background-color: rgba(255,255,255,.3);
-        transition: .5s;
-        backdrop-filter: blur(10px);
-    }
-}
-.nav__item{
-    margin-bottom: var(--mb-4);
-}
-.nav__link{
-    position: relative;
-    color: var(--dark-color);
-}
-.nav__link:hover{
-    color: var(--first-color);
-}
-.nav__logo{
-    color: var(--white-color);
-}
-.nav__toggle{
-    color: var(--white-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-
-/* ===== MEDIA QUERIES =====*/
-@media screen and (min-width: 768px) {
-
-    body{
-        margin: 0;
-    }
-
-    
-    .nav{
-        height: calc(var(--header-height) + 1rem);
-    }
-    .nav__list{
-        display: flex;
-    }
-    .nav__item{
-        margin-left: var(--mb-4);
-        margin-bottom: 0;
-    }
-    .nav__toggle{
-        display: none;
-    }
-    .nav__link{
-        color: var(--white-color);
-    }
-    .nav__link:hover{
-        color: var(--white-color);
-    }
-    .active::after{
-        background-color: var(--white-color);
-    }
-}
-
 
 
         .booking-form {
@@ -212,38 +266,39 @@ img{
         }
     </style>
 </head>
+
 <body>
     <header class="l-header">
         <nav class="nav bd-grid">
-                <div>
-                    <a href="#" class="nav__logo">Radatouli</a>
-                </div>
+            <div>
+                <a href="#" class="nav__logo">Radatouli</a>
+            </div>
 
-                <div class="nav__home" id="nav-home">
-                    <ul class="nav__list">
-                        <li class="nav__item"><a href="#home" class="nav__link active">home</a></li>
-                        <li class="nav__item"><a href="#reserve" class="nav__link">Reserve</a></li>
-                        <li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>
-                        <?php
-                        // session_start();
-                        if (isset($_SESSION['username'])) {
-                            // Jika sudah login, tampilkan tautan Logout
-                            echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
-                        } else {
-                            // Jika belum login, tampilkan tautan Login
-                            echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Login</a></li>';
-                        }
-                        ?>
-                    </ul>
-                </div>
+            <div class="nav__home" id="nav-home">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="landing.php" class="nav__link active">home</a></li>
+                    <li class="nav__item"><a href="calender2.php" class="nav__link">Reserve</a></li>
+                    <li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>
+                    <?php
+                    // session_start();
+                    if (isset($_SESSION['username'])) {
+                        // Jika sudah login, tampilkan tautan Logout
+                        echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
+                    } else {
+                        // Jika belum login, tampilkan tautan Login
+                        echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Login</a></li>';
+                    }
+                    ?>
+                </ul>
+            </div>
 
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-home'></i>
-                </div>
-            </nav>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-home'></i>
+            </div>
+        </nav>
     </header>
 
-    
+
     <?php
     // include "database.php"
     // Database connection
@@ -325,5 +380,48 @@ img{
         </form>
         <?= $msg ?>
     </section>
+    <section class="booking-schedule">
+        <h3>Jadwal Booking</h3>
+
+        <table class="calendar">
+            <tr>
+                <th>Tanggal</th>
+                <th>Waktu</th>
+                <th>Nama</th>
+                <th>Action</th>
+            </tr>
+    </section>
+
+    <?php
+    $sql = "SELECT id, booking_date, booking_time, booking_name FROM bookings";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr><td>" . $row["booking_date"] . "</td><td>" . $row["booking_time"] . "</td><td>" . $row["booking_name"] . "</td>";
+            echo "<td>";
+            echo "<form method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
+            echo "<input type='hidden' name='action' value='edit'>";
+            echo "<input type='hidden' name='booking_id' value='" . $row["id"] . "'>";
+            echo "<input type='hidden' name='booking_date' value='" . $row["booking_date"] . "'>";
+            echo "<input type='hidden' name='booking_time' value='" . $row["booking_time"] . "'>";
+            echo "<input type='hidden' name='booking_name' value='" . $row["booking_name"] . "'>";
+            echo "<input type='submit' value='Edit'>";
+            echo "</form>";
+            echo "<form method='post' action='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>";
+            echo "<input type='hidden' name='action' value='delete'>";
+            echo "<input type='hidden' name='booking_id' value='" . $row["id"] . "'>";
+            echo "<input type='submit' value='Delete'>";
+            echo "</form>";
+            echo "</td></tr>";
+        }
+    } else {
+        echo "<tr><td colspan='4'>Tidak ada booking tersedia.</td></tr>";
+    }
+
+    $conn->close();
+    ?>
+    </table>
 </body>
+
 </html>

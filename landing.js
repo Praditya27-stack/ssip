@@ -61,3 +61,8 @@ sr.reveal('.reserve__social-icon',{delay:600, interval:200})
 sr.reveal('.menus__subtitle',{})
 sr.reveal('.menus__name',{distance:'20px',delay:50,interval:100})
 sr.reveal('.menus__img',{delay:400})
+
+document.querySelector('#close-edit').onclick = () =>{
+    document.querySelector('.edit-form-container').style.display = 'none';
+    window.location.href = 'admin.php';
+ };

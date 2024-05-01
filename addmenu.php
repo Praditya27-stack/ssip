@@ -13,16 +13,16 @@ if (isset($_POST["addButton"])) {
     $check_query = mysqli_query($db, "SELECT * FROM menu WHERE dish_id='$dishid'");
     if (mysqli_num_rows($check_query) > 0) {
         // Redirect back to the add menu page with an error message
-        header("location: add.php?error=existing_id");
+        header("location: addmenu.php?error=existing_id");
         exit(); // Stop further execution
     }
 
     // Insert new menu into the database
     $result = mysqli_query($db, "INSERT INTO menu (dish_id, dish_name, price) VALUES ('$dishid','$name', '$price')");
-    $result2 = mysqli_query($db, "INSERT INTO stock (stock_id, dish_id, quantity) VALUES ('$dishid','$dishid', 0)");
+    $result2 = mysqli_query($db, "INSERT INTO stock (stock_id, dish_id, quantity) VALUES ('$dishid','$dishid', '$quantity')");
 
     // Redirect to dashboard after successful insertion
-    header("location: dashboard.php");
+    header("location: menu.php");
     exit(); // Stop further execution
 }
 
@@ -81,6 +81,10 @@ if (isset($_POST["addButton"])) {
         <form action="" method="post">
     <form action="" method="post">
 
+        <div class="mb-3">
+            <label for="menuname" class="form-label">Menu ID</label>
+            <input type="text" class="form-control" id="menuId" name="menuId" required>
+        </div>
         <div class="mb-3">
             <label for="menuname" class="form-label">Menu Name</label>
             <input type="text" class="form-control" id="menuname" name="menuname" required>

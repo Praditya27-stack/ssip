@@ -8,7 +8,7 @@
 
 
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <title>Radatouli</title>
 </head>
 <body>
@@ -21,11 +21,11 @@
 
             <div class="nav__home" id="nav-home">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="#home" class="nav__link active">home</a></li>
-                    <li class="nav__item"><a href="#reserve" class="nav__link">Reserve</a></li>
-                    IF ADMIN
+                    <li class="nav__item"><a href="landing.php" class="nav__link active">home</a></li>
+                    <li class="nav__item"><a href="calender2.php" class="nav__link">Reserve</a></li>
+                    <!-- IF ADMIN -->
                     <li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>
-                    IF USER
+                    <!-- IF USER -->
                     <li class="nav__item"><a href="menu2.php" class="nav__link">menu</a></li>
                     <?php
                     // session_start();
@@ -46,6 +46,6 @@
         </nav>
     </header>
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
