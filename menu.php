@@ -1,7 +1,7 @@
 <?php
 
-include "database.php";
 include "layout/header.php";
+include "database.php";
 // MUNCULIN DAFTAR MENU PLUS QUANTITY(TERMURAH)
 $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
 m.category, s.quantity

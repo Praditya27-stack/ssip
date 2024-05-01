@@ -286,7 +286,7 @@
                         echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
                     } else {
                         // Jika belum login, tampilkan tautan Login
-                        echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Login</a></li>';
+                        echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Logout</a></li>';
                     }
                     ?>
                 </ul>

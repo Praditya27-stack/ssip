@@ -23,23 +23,25 @@ if (isset($_POST["loginBtn"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
 
-        
-        $sql = "SELECT id, username, password FROM admin where
-        username = '$username' and
-        password = '$password'
-        UNION
-        SELECT customer_id, username, password FROM customers where
-        username = '$username' and
-        password = '$password'";
-        $result = $db -> query($sql);
+        $sql = "SELECT 'admin' AS user_type, id, username, password FROM admin 
+                WHERE username = '$username' AND password = '$password'
+                UNION
+                SELECT 'customer' AS user_type, customer_id, username, password FROM customers 
+                WHERE username = '$username' AND password = '$password'";
+        $result = $db->query($sql);
 
-        if ($result -> num_rows > 0) {
-            $data = $result -> fetch_assoc();
+        if ($result->num_rows > 0) {
+            $data = $result->fetch_assoc();
         
             $_SESSION["is_login"] = true;
             $_SESSION["username"] = $data["username"];
-        
-            header("location: landing.php");
+            
+            // Check the user type and redirect accordingly
+            if ($data["user_type"] === 'admin') {
+                header("location: landing.php");
+            } else {
+                header("location: landing2.php");
+            }
         } else {
             $message = "INVALID USERNAME OR PASSWORD";
             // Redirect back to the login page with the error message
@@ -47,6 +49,7 @@ if (isset($_POST["loginBtn"])) {
         }
     }
 }
+
 
 ?>
 <!DOCTYPE html>
