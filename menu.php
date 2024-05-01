@@ -18,12 +18,31 @@ LEFT JOIN stock s ON m.dish_id = s.dish_id
 GROUP BY m.dish_id
 HAVING quantity < 5
 ORDER BY m.category, m.price DESC";
+
 $result = mysqli_query($db, $query);
+
+?>
+<!-- <div class="btn-group dropstart" style="margin-top: 75px; margin-left:1425px;" role="group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      Filter
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+    </ul>
+</div> -->
+<select class="form-select" style="margin-top:100px" aria-label="Default select example">
+  <option selected>Filter</option>
+  <option value="Lowest">Lowest Stock</option>
+  <option value="Highest">Highest Stock</option>
+</select>
+<?php
 
 // Check if there are any menu items
 if (mysqli_num_rows($result) > 0) {
+   
     // Start the HTML table and wrap it in a div for center alignment and positioning
-    echo "<div style='text-align: center; margin-top: 100px;'>"; // Adjust the margin-top as needed
+    echo "<div style='text-align: center; margin-top: 25px;'>"; // Adjust the margin-top as needed
     echo "<table border='1' class='table table-primary form-container' style='margin-left: auto; margin-right: auto;'>";
     echo "<tr>
             <th>Menu ID</th>
@@ -34,9 +53,18 @@ if (mysqli_num_rows($result) > 0) {
             <th>Quantity</th>
             <th>Action</th>
         </tr>";
-
+    // echo '<div class="btn-group dropstart" role="group">
+    //     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    //         Dropdown
+    //     </button>
+    //     <ul class="dropdown-menu">
+    //         <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+    //         <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+    //     </ul>
+    //     </div>';
     // Output each menu item as a table row
     while ($row = mysqli_fetch_assoc($result)) {
+        
         $id = $row["dish_id"];
         echo "<tr>";
         echo "<td>" . $row["dish_id"] . "</td>";
@@ -50,8 +78,6 @@ if (mysqli_num_rows($result) > 0) {
         echo "</tr>";
     }
 
-
-
     // End the HTML table and the div
     echo "</table>";
     echo "</div>";
@@ -60,19 +86,19 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 if (isset($_POST['add_menu'])) {
-    
+
     $name = $_POST["name"];
     $price = $_POST["price"];
     $desc = $_POST["description"];
     $category = $_POST["category"];
-   
+
     $result = mysqli_query($db, "INSERT INTO menu (dish_name, price,description,category) VALUES ('$name', '$price','$desc','$category')");
-    if($result){
+    if ($result) {
 
         $new_dish_id = mysqli_insert_id($db);
         // Now you can use $new_dish_id for further operations or logging
         echo "New dish_id: " . $new_dish_id;
-    
+
         // Proceed to insert into the stock table with the retrieved dish_id
         $quantity = $_POST["quantity"];
         $result2 = mysqli_query($db, "INSERT INTO stock (stock_id,dish_id, quantity) VALUES ('$new_dish_id','$new_dish_id', '$quantity')");
@@ -88,15 +114,15 @@ if (isset($_POST['update_menu'])) {
     $price = $_POST['price'];
     $description = $_POST['description'];
     $category = $_POST['category'];
-    $quantity =$_POST['quantity'];
+    $quantity = $_POST['quantity'];
 
-    $update_query = mysqli_query($db,"UPDATE menu 
+    $update_query = mysqli_query($db, "UPDATE menu 
     SET dish_name = '$dish_name', 
         price = '$price', 
         description = '$description',
         category = '$category' 
     WHERE dish_id='$dish_id'");
-    $update_query2 = mysqli_query($db,"UPDATE stock 
+    $update_query2 = mysqli_query($db, "UPDATE stock 
     SET quantity = '$quantity' 
     WHERE dish_id='$dish_id'");
 
@@ -115,8 +141,8 @@ if (isset($_GET['delete'])) {
     if (!empty($dish_id)) {
         $dish_id = (int)$dish_id;
         $delete_query = mysqli_query($db, "DELETE FROM menu WHERE dish_id=$dish_id");
-        $recover_query = mysqli_query($db,"ALTER TABLE menu AUTO_INCREMENT = $dish_id");
-        $recover_query2 = mysqli_query($db,"ALTER TABLE stock AUTO_INCREMENT = $dish_id");
+        $recover_query = mysqli_query($db, "ALTER TABLE menu AUTO_INCREMENT = $dish_id");
+        $recover_query2 = mysqli_query($db, "ALTER TABLE stock AUTO_INCREMENT = $dish_id");
     }
     header("location: menu.php");
 }
@@ -138,25 +164,25 @@ if (isset($_GET['delete'])) {
     <div class="container">
         <section>
             <form action="" method="post" class="add-product-form d-column">
-            
+
                 <h3>Add Menu</h3>
                 <div class="input-group justify-content-between">
                     <input type="text" name="name" placeholder="Enter Menu Name" required class="form-control me-3">
-                    
-                        <span class="input-group-text">$</span>
-                        <input type="number" placeholder="Enter Price" name="price" class="form-control">
-                        <span class="input-group-text">.00</span>
-                        <input type="text" name="description" placeholder="Enter Description" class="form-control" required>
-                        <input type="text" name="category" placeholder="Enter the Category" class="form-control" required>
-                        <input type="number" name="quantity" placeholder="Enter the Quantity" class="form-control" required>
+
+                    <span class="input-group-text">$</span>
+                    <input type="number" placeholder="Enter Price" name="price" class="form-control">
+                    <span class="input-group-text">.00</span>
+                    <input type="text" name="description" placeholder="Enter Description" class="form-control" required>
+                    <input type="text" name="category" placeholder="Enter the Category" class="form-control" required>
+                    <input type="number" name="quantity" placeholder="Enter the Quantity" class="form-control" required>
                 </div>
-                 
-                 <input type="submit" name="add_menu" class="btn btn-primary" value="Add this menu">
-            </form> 
+
+                <input type="submit" name="add_menu" class="btn btn-primary" value="Add this menu">
+            </form>
         </section>
     </div>
-    
-   
+
+
     <?php
 
     if (isset($message)) {
@@ -185,13 +211,13 @@ if (isset($_GET['delete'])) {
 
                     <form action="" method="post" class="form-control d-flex justify-content-around">
                         <div>
-                            <input type="hidden" name="id" value="<?=$fetch_edit['dish_id'] ?>">
-                            <input type="text" name="name" value="<?=$fetch_edit['dish_name'] ?>">
+                            <input type="hidden" name="id" value="<?= $fetch_edit['dish_id'] ?>">
+                            <input type="text" name="name" value="<?= $fetch_edit['dish_name'] ?>">
                             <input type="number" name="price" value="<?= $fetch_edit['price'] ?>">
-                            <input type="text" name="description" placeholder="Enter Description" value="<?=$fetch_edit['description'] ?>">
+                            <input type="text" name="description" placeholder="Enter Description" value="<?= $fetch_edit['description'] ?>">
                             <input type="text" name="category" placeholder="Enter the Category" value="<?= $fetch_edit['category'] ?>">
                             <input type="text" name="quantity" placeholder="Enter the Quantity" value="<?= $fetch_edit['quantity'] ?>">
-                       
+
                         </div>
                         <div>
                             <input type="submit" value="update the product" name="update_menu" class="btn btn-outline-success">
@@ -218,6 +244,8 @@ if (isset($_GET['delete'])) {
         </script>
 
     </section>
+
+    
 </body>
 
 </html>
