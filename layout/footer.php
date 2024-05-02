@@ -7,7 +7,7 @@
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
-    <!--===== FOOTER =====-->
+    
     <footer class="footer section">
             <div class="footer__container bd-grid">
                 <div class="footer__data">

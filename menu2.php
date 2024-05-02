@@ -27,13 +27,11 @@ if (isset($_POST['add_to_cart'])) {
     $query_max = mysqli_query($db, "SELECT name FROM orders WHERE name = '$dish_name'");
     $total_amount = isset($_POST['total_amount']) ? intval($_POST['total_amount']) : 1;
     
-    // $customer_id = isset($_POST['customer_id']) ? intval($_POST['customer_id']) : null;
     $getid=mysqli_query($db,"SELECT customer_id FROM login WHERE login_id = 0");
     $custid=mysqli_fetch_array($getid);
     $customer_id=$custid['customer_id'];
 
     if ($customer_id) {
-        // Periksa apakah customer_id valid
         $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = '$customer_id'";
         $customer_check_result = mysqli_query($db, $customer_check_query);
 
@@ -62,7 +60,7 @@ if (isset($_POST['add_to_cart'])) {
 
     <div class="menu-container">
         <?php
-        $result = mysqli_query($db, $query); // Execute the main menu query
+        $result = mysqli_query($db, $query); 
 
         if ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
@@ -76,7 +74,6 @@ if (isset($_POST['add_to_cart'])) {
                     <form action="" method="post">
                         <input type="hidden" name="dish_name" value="<?= htmlspecialchars($row["dish_name"]) ?>">
                         <input type="hidden" name="price" value="<?= $row["price"] ?>">
-                        <!-- Pass customer_id and total_amount dynamically from the form -->
                         
                         <input type="hidden" name="total_amount" value="<?= isset($_POST['total_amount']) ? htmlspecialchars($_POST['total_amount']) : '1' ?>">
                         <input type="submit" name="add_to_cart" value="Order">

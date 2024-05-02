@@ -2,7 +2,6 @@
 
 include "layout/header.php";
 include "database.php";
-// MUNCULIN DAFTAR MENU PLUS QUANTITY(TERMURAH)
  $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
 m.category, s.quantity
 FROM menu m
@@ -78,48 +77,6 @@ if(isset($_POST["beverage"])){
 
 }
 
-    // if($sort == "all"){
-    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
-    //     m.category, s.quantity
-    //     FROM menu m
-    //     INNER JOIN stock s ON m.dish_id = s.dish_id
-    //     ORDER BY m.dish_id
-    //     ASC
-    //     ";
-
-    // }
-    // else if($sort=="highest_price"){
-    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
-    //     m.category, s.quantity
-    //     FROM menu m
-    //     INNER JOIN stock s ON m.dish_id = s.dish_id
-    //     ORDER BY m.price
-    //     DESC
-    //     ";
-
-    // }
-    // else if ($sort == "lowest_price") {
-    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
-    //     m.category, s.quantity
-    //     FROM menu m
-    //     INNER JOIN stock s ON m.dish_id = s.dish_id
-    //     ORDER BY m.price
-    //     ASC
-    //     ";
-
-    // }
-   
-    // elseif ($sort == "lowest_stock") {
-    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
-    //     m.category, s.quantity
-    //     FROM menu m
-    //     LEFT JOIN stock s ON m.dish_id = s.dish_id
-    //     GROUP BY m.dish_id
-    //     HAVING quantity < 5
-    //     ORDER BY  m.price DESC";
-       
-    // }
-
 
 
 $result = mysqli_query($db, $query);
@@ -127,15 +84,7 @@ $result = mysqli_query($db, $query);
 
 
 ?>
-<!-- <div class="btn-group dropstart" style="margin-top: 75px; margin-left:1425px;" role="group">
-    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Filter
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-      <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-    </ul>
-</div> -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -189,7 +138,6 @@ if (mysqli_num_rows($result) > 0) {
         echo "</tr>";
     }
 
-    // End the HTML table and the div
     echo "</table>";
     echo "</div>";
 } else {
@@ -207,7 +155,6 @@ if (isset($_POST['add_menu'])) {
     if($result){
 
         $new_dish_id = mysqli_insert_id($db);
-        // Now you can use $new_dish_id for further operations or logging
         echo "New dish_id: " . $new_dish_id;
     
         // Proceed to insert into the stock table with the retrieved dish_id
@@ -255,10 +202,8 @@ if (isset($_GET['delete'])) {
         $recover_query = mysqli_query($db, "ALTER TABLE menu AUTO_INCREMENT = $dish_id");
         $recover_query2 = mysqli_query($db, "ALTER TABLE stock AUTO_INCREMENT = $dish_id");
     }
-    // header("location: menu.php");
 }
 
-// mysqli_close($db);
 ?>
 
 <!DOCTYPE html>
@@ -315,7 +260,6 @@ if (isset($_GET['delete'])) {
             FROM menu m
             INNER JOIN stock s ON m.dish_id = s.dish_id
             WHERE m.dish_id = $id");
-            // "SELECT * FROM `menu` WHERE dish_id = $id"
             if (mysqli_num_rows($edit_query) > 0) {
                 while ($fetch_edit = mysqli_fetch_assoc($edit_query)) {
         ?>

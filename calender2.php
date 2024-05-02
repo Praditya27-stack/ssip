@@ -284,10 +284,8 @@
                     <?php
                     
                     if (isset($_SESSION['username'])) {
-                        // Jika sudah login, tampilkan tautan Logout
                         echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
                     } else {
-                        // Jika belum login, tampilkan tautan Login
                         echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Logout</a></li>';
                     }
                     ?>
@@ -302,8 +300,6 @@
 
 
     <?php
-    // include "database.php"
-    // Database connection
     $host = 'localhost';
     $username = 'root';
     $password = '';

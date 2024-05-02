@@ -29,7 +29,6 @@
                 echo'<li class="nav__item"><a href="menu.php" class="nav__link">Menu</a></li>';
                 echo '<li class="nav__item"><a href="logout.php" class="nav__link btn btn-light text-dark">Logout</a></li>';
             } else {
-                // Jika belum login, tampilkan tautan Login
                 echo"<li class='nav__item'><a href='submit-login.php' class='nav__link'>Reserve</a></li>";
                 echo'<li class="nav__item"><a href="submit-login.php" class="nav__link">Menu</a></li>';
                 echo '<li class="nav__item"><a href="submit-login.php" class="nav__link btn btn-light text-dark">Login</a></li>';
