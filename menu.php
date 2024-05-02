@@ -145,23 +145,14 @@ $result = mysqli_query($db, $query);
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
-       
-        <select name="sort" class="form-select" style="margin-top:100px;display:hidden;" aria-label="Default select example">
-            <div>
-            <option selected value="all">All</option>
-            <option value="highest_price">Highest Price</option>
-            <option value="lowest_price">Lowest Price</option>
-            <option value="lowest_stock">Lowest Stock</option>
-            </div>
-            
-        </select>
-        <button name="all">All</button>
-        <button name="highest_price">Highest Price</button>
-        <button name="lowest_price">Lowest Price</button>
-        <button name="lowest_stock">Lowest Stock</button>
-        <button name="food">Food</button>
-        <button name="beverage">Beverage</button>
+    <form action="" method="post" class="text-center" style="margin-top: 80px;">
+
+        <button name="all" class="btn btn-primary">All</button>
+        <button name="highest_price" class="btn btn-primary">Highest Price</button>
+        <button name="lowest_price" class="btn btn-primary">Lowest Price</button>
+        <button name="lowest_stock" class="btn btn-primary">Lowest Stock</button>
+        <button name="food" class="btn btn-primary">Food</button>
+        <button name="beverage" class="btn btn-primary">Beverage</button>
 
     </form>
 </body>
@@ -183,16 +174,6 @@ if (mysqli_num_rows($result) > 0) {
             <th>Quantity</th>
             <th>Action</th>
         </tr>";
-    // echo '<div class="btn-group dropstart" role="group">
-    //     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-    //         Dropdown
-    //     </button>
-    //     <ul class="dropdown-menu">
-    //         <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-    //         <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-    //     </ul>
-    //     </div>';
-    // Output each menu item as a table row
     while ($row = mysqli_fetch_assoc($result)) {
         
         $id = $row["dish_id"];
@@ -293,7 +274,7 @@ if (isset($_GET['delete'])) {
 
     <div class="container">
         <section>
-            <form action="" method="post" class="add-product-form d-column">
+            <form action="" method="post" class="add-product-form d-column text-center">
 
                 <h3>Add Menu</h3>
                 <div class="input-group justify-content-between">
@@ -307,7 +288,7 @@ if (isset($_GET['delete'])) {
                     <input type="number" name="quantity" placeholder="Enter the Quantity" class="form-control" required>
                 </div>
 
-                <input type="submit" name="add_menu" class="btn btn-primary" value="Add this menu">
+                <input type="submit" name="add_menu" class="btn btn-primary mt-3" value="Add this menu">
             </form>
         </section>
     </div>
@@ -347,7 +328,6 @@ if (isset($_GET['delete'])) {
                             <input type="text" name="description" placeholder="Enter Description" value="<?= $fetch_edit['description'] ?>">
                             <input type="text" name="category" placeholder="Enter the Category" value="<?= $fetch_edit['category'] ?>">
                             <input type="number" name="quantity" placeholder="Enter the Quantity" value="<?= $fetch_edit['quantity'] ?>">
-
                         </div>
                         <div>
                             <input type="submit" value="update the product" name="update_menu" class="btn btn-outline-success">

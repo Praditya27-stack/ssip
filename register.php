@@ -1,6 +1,7 @@
 <?php
 // Include the database connection file
 include __DIR__ . "/database.php";
+session_start();
 
 // Check if the form is submitted
 if (isset($_POST["register-button"])) {
@@ -18,19 +19,18 @@ if (isset($_POST["register-button"])) {
         $check_result = $db->query($check_sql);
     
         if ($check_result && $check_result->num_rows > 0) {
-            // Username already exists, redirect with error message
             $message = "Username already exists.";
             header("location: register.php?message=" . urlencode($message));
             exit; // Stop further execution
         } else {
-            // Username doesn't exist, proceed with registration
+            $hash_pass = hash("sha256", $password);
+
             $insert_sql = "INSERT INTO customers (customer_name, email, phone,username,password)
-                        VALUES ('$name', '$email', '$phone','$username', '$password')";
+                        VALUES ('$name', '$email', '$phone','$username', '$hash_pass')";
             
             $insert_result = $db->query($insert_sql);
     
             if ($insert_result) {
-                // Registration successful, redirect to landing page
                 header("location: submit-login.php");
                 exit; // Stop further execution
             } 

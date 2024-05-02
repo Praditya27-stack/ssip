@@ -22,17 +22,17 @@
 
     <div class="nav__home" id="nav-home">
         <ul class="nav__list">
-            <li class="nav__item"><a href="landing.php" class="nav__link active">home</a></li>
+            <li class="nav__item"><a href="landing.php" class="nav__link active">Home</a></li>
             <?php
             if(isset($_SESSION['username'])) {
                 echo"<li class='nav__item'><a href='calendar.php' class='nav__link'>Reserve</a></li>";                
-                echo'<li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>';
-                echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
+                echo'<li class="nav__item"><a href="menu.php" class="nav__link">Menu</a></li>';
+                echo '<li class="nav__item"><a href="logout.php" class="nav__link btn btn-light text-dark">Logout</a></li>';
             } else {
                 // Jika belum login, tampilkan tautan Login
                 echo"<li class='nav__item'><a href='submit-login.php' class='nav__link'>Reserve</a></li>";
-                echo'<li class="nav__item"><a href="submit-login.php" class="nav__link">menu</a></li>';
-                echo '<li class="nav__item"><a href="submit-login.php" class="nav__link">Login</a></li>';
+                echo'<li class="nav__item"><a href="submit-login.php" class="nav__link">Menu</a></li>';
+                echo '<li class="nav__item"><a href="submit-login.php" class="nav__link btn btn-light text-dark">Login</a></li>';
             }
             ?>
         </ul>
