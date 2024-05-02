@@ -49,6 +49,35 @@ if(isset($_POST["lowest_stock"])){
     ORDER BY  m.price DESC";
 
 }
+if(isset($_POST["food"])){
+    $query ="SELECT m.dish_id, m.dish_name, m.price, m.description,
+    m.category, s.quantity
+    FROM menu m
+    INNER JOIN stock s ON m.dish_id = s.dish_id
+    WHERE price <= (
+    SELECT MAX(price)
+    FROM menu
+    WHERE category = 'food'
+    )
+    ORDER BY category, price ASC";
+
+
+}
+if(isset($_POST["beverage"])){
+    $query ="SELECT m.dish_id, m.dish_name, m.price, m.description, m.category, s.quantity
+    FROM menu m
+    INNER JOIN stock s ON m.dish_id = s.dish_id
+    WHERE price <= (
+    SELECT MAX(price)
+    FROM menu
+    WHERE category = 'beverage'
+    )
+    AND m.category = 'beverage'
+    ORDER BY category, price ASC";
+
+
+}
+
     // if($sort == "all"){
     //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
     //     m.category, s.quantity
@@ -118,17 +147,21 @@ $result = mysqli_query($db, $query);
 <body>
     <form action="" method="post">
        
-        <select name="sort" class="form-select" style="margin-top:100px" aria-label="Default select example">
-            
+        <select name="sort" class="form-select" style="margin-top:100px;display:hidden;" aria-label="Default select example">
+            <div>
             <option selected value="all">All</option>
             <option value="highest_price">Highest Price</option>
             <option value="lowest_price">Lowest Price</option>
             <option value="lowest_stock">Lowest Stock</option>
+            </div>
+            
         </select>
         <button name="all">All</button>
         <button name="highest_price">Highest Price</button>
         <button name="lowest_price">Lowest Price</button>
         <button name="lowest_stock">Lowest Stock</button>
+        <button name="food">Food</button>
+        <button name="beverage">Beverage</button>
 
     </form>
 </body>
