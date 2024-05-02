@@ -50,8 +50,7 @@ if(isset($_POST["lowest_stock"])){
 
 }
 if(isset($_POST["food"])){
-    $query ="SELECT m.dish_id, m.dish_name, m.price, m.description,
-    m.category, s.quantity
+    $query ="SELECT m.dish_id, m.dish_name, m.price, m.description, m.category, s.quantity
     FROM menu m
     INNER JOIN stock s ON m.dish_id = s.dish_id
     WHERE price <= (
@@ -59,6 +58,7 @@ if(isset($_POST["food"])){
     FROM menu
     WHERE category = 'food'
     )
+    AND m.category = 'food'
     ORDER BY category, price ASC";
 
 
