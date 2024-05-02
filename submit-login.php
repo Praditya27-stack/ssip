@@ -28,6 +28,7 @@ if (isset($_POST["loginBtn"])) {
                 UNION
                 SELECT 'customer' AS user_type, customer_id, username, password FROM customers 
                 WHERE username = '$username' AND password = '$password'";
+                
         $result = $db->query($sql);
 
         if ($result->num_rows > 0) {
