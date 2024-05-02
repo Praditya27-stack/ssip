@@ -86,25 +86,25 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 if (isset($_POST['add_menu'])) {
-
+    
     $name = $_POST["name"];
     $price = $_POST["price"];
     $desc = $_POST["description"];
     $category = $_POST["category"];
-
+   
     $result = mysqli_query($db, "INSERT INTO menu (dish_name, price,description,category) VALUES ('$name', '$price','$desc','$category')");
-    if ($result) {
+    if($result){
 
         $new_dish_id = mysqli_insert_id($db);
         // Now you can use $new_dish_id for further operations or logging
         echo "New dish_id: " . $new_dish_id;
-
+    
         // Proceed to insert into the stock table with the retrieved dish_id
         $quantity = $_POST["quantity"];
         $result2 = mysqli_query($db, "INSERT INTO stock (stock_id,dish_id, quantity) VALUES ('$new_dish_id','$new_dish_id', '$quantity')");
     }
     header("location: menu.php");
-    exit(); // Stop further execution
+    exit(); // Stop further execution
 
 }
 
@@ -144,7 +144,7 @@ if (isset($_GET['delete'])) {
         $recover_query = mysqli_query($db, "ALTER TABLE menu AUTO_INCREMENT = $dish_id");
         $recover_query2 = mysqli_query($db, "ALTER TABLE stock AUTO_INCREMENT = $dish_id");
     }
-    header("location: menu.php");
+    // header("location: menu.php");
 }
 
 // mysqli_close($db);
@@ -216,7 +216,7 @@ if (isset($_GET['delete'])) {
                             <input type="number" name="price" value="<?= $fetch_edit['price'] ?>">
                             <input type="text" name="description" placeholder="Enter Description" value="<?= $fetch_edit['description'] ?>">
                             <input type="text" name="category" placeholder="Enter the Category" value="<?= $fetch_edit['category'] ?>">
-                            <input type="text" name="quantity" placeholder="Enter the Quantity" value="<?= $fetch_edit['quantity'] ?>">
+                            <input type="number" name="quantity" placeholder="Enter the Quantity" value="<?= $fetch_edit['quantity'] ?>">
 
                         </div>
                         <div>

@@ -97,5 +97,33 @@
     color:var(--red);
  }
 
+.products .box-container{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, 35rem);
+   gap:1.5rem;
+   justify-content: center;
+}
 
+.products .box-container .box{
+   text-align: center;
+   padding:2rem;
+   box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+   border:.1rem solid #999;
+   border-radius: .5rem;
+}
+
+.products .box-container .box img{
+   height: 25rem;
+}
+
+.products .box-container .box h3{
+   margin:1rem 0;
+   font-size: 2.5rem;
+   color:#333;
+}
+
+.products .box-container .box .price{
+   font-size: 2.5rem;
+   color:#333;
+}
 
