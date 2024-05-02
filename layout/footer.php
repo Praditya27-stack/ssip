@@ -12,7 +12,7 @@
             <div class="footer__container bd-grid">
                 <div class="footer__data">
                     <h2 class="footer__title">RADATOULI</h2>
-                    <p class="footer__text">PEPEK</p>
+                    <p class="footer__text">FAQ</p>
                 </div>
 
                 <div class="footer__data">

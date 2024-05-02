@@ -1,6 +1,5 @@
 <?php
-
-include "database.php";
+include "database.php"; // Include the database connection file
 
 $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
 m.category, s.quantity
@@ -18,49 +17,55 @@ GROUP BY m.dish_id
 HAVING quantity < 5
 ORDER BY m.category, m.price DESC";
 
-$result = mysqli_query($db, $query);
-
+// Process form submission
 if (isset($_POST['add_to_cart'])) {
     $dish_name = $_POST['dish_name'];
     $price = $_POST['price'];
-    $total_amount = 1;
-    // $desc = $_POST['description'];
-    // $category = $_POST['category'];
+    $customer_id = isset($_POST['customer_id']) ? intval($_POST['customer_id']) : null;
+    $total_amount = isset($_POST['total_amount']) ? intval($_POST['total_amount']) : 1;
 
-    $cart = mysqli_query($db, "SELECT * FROM `orders` WHERE name='$dish_name'");
+    if ($customer_id) {
+        // Periksa apakah customer_id valid
+        $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = $customer_id";
+        $customer_check_result = mysqli_query($db, $customer_check_query);
 
-    if(mysqli_num_rows($cart) > 0){
-        $message[] = 'product already added to cart';
-     }else{
-        $insert_product = mysqli_query($db, "INSERT INTO `orders`(name, price, total_amount) VALUES('$dish_name', '$price',  '$total_amount')");
-        $message[] = 'product added to cart succesfully';
-     }
+        if (mysqli_num_rows($customer_check_result) > 0) {
+            // Customer_id valid, lakukan operasi INSERT ke tabel orders
+            $insert_order_query = "INSERT INTO orders (customer_id, name, price, total_amount) 
+                                   VALUES ('$customer_id', '$dish_name', '$price', '$total_amount')";
 
+            if (mysqli_query($db, $insert_order_query)) {
+                echo "Produk berhasil ditambahkan ke keranjang.";
+            } else {
+                echo "Error: " . mysqli_error($db);
+            }
+        } else {
+            echo "Invalid customer selection.";
+        }
+    } else {
+        echo "Invalid customer ID.";
+    }
 }
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="menu2.css">
     <title>Menu</title>
 </head>
-
 <body>
-    <?php
-    include "layout/header.php";
+    <?php include "layout/header.php"; ?>
 
-    if (mysqli_num_rows($result) > 0) {
-        ?>
-        <div class="menu-container">
-            <?php
+    <div class="menu-container">
+        <?php
+        $result = mysqli_query($db, $query); // Execute the main menu query
+
+        if ($result && mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
-                $id = $row["dish_id"];
-                ?>
+        ?>
                 <div class="menu-item">
                     <h2><?= $row["dish_name"] ?></h2>
                     <p>Price: <?= $row["price"] ?></p>
@@ -68,25 +73,40 @@ if (isset($_POST['add_to_cart'])) {
                     <p>Category: <?= $row["category"] ?></p>
                     <p>Quantity: <?= $row["quantity"] ?></p>
                     <form action="" method="post">
-                        <input type="hidden" name="dish_name" value="<?= $row["dish_name"] ?>">
+                        <input type="hidden" name="dish_name" value="<?= htmlspecialchars($row["dish_name"]) ?>">
                         <input type="hidden" name="price" value="<?= $row["price"] ?>">
-                        <input type="hidden" name="description" value="<?= $row["description"] ?>">
-                        <input type="hidden" name="category" value="<?= $row["category"] ?>">
-                        <input type="hidden" name="quantity" value="<?= $row["quantity"] ?>">
+                        <!-- Pass customer_id and total_amount dynamically from the form -->
+                        <input type="hidden" name="customer_id" value="<?= isset($_POST['customer_id']) ? htmlspecialchars($_POST['customer_id']) : '' ?>">
+                        <input type="hidden" name="total_amount" value="<?= isset($_POST['total_amount']) ? htmlspecialchars($_POST['total_amount']) : '1' ?>">
                         <input type="submit" name="add_to_cart" value="Order">
                     </form>
                 </div>
-
-                    
-            <?php
-                }
-            } else {
-                echo "Menunya Kosong.";
+        <?php
             }
+        } else {
+            echo "Menu is empty.";
+        }
+        ?>
+    </div>
 
+    <!-- Customer selection form -->
+    <form method="post" action="">
+        <label for="customer_id">Select Customer:</label>
+        <select name="customer_id" id="customer_id">
+            <?php
+            $customer_query = "SELECT customer_id, customer_name FROM customers";
+            $customer_result = mysqli_query($db, $customer_query);
+
+            if ($customer_result && mysqli_num_rows($customer_result) > 0) {
+               
+
+                while ($row = mysqli_fetch_assoc($customer_result)) {
+                    echo "<option value='" . $row["customer_id"] . "'>" . $row["customer_name"] . "</option>";
+                }
+            }
             ?>
-            </table>
-        </div>
-</body>
+        </select>
+    </form>
 
+</body>
 </html>
