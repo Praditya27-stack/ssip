@@ -3,23 +3,99 @@
 include "layout/header.php";
 include "database.php";
 // MUNCULIN DAFTAR MENU PLUS QUANTITY(TERMURAH)
-$query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+ $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
 m.category, s.quantity
 FROM menu m
 INNER JOIN stock s ON m.dish_id = s.dish_id
-ORDER BY m.price
+ORDER BY m.dish_id
 ASC
 ";
+if(isset($_POST["all"])){
+    $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+    m.category, s.quantity
+    FROM menu m
+    INNER JOIN stock s ON m.dish_id = s.dish_id
+    ORDER BY m.dish_id
+    ASC
+    ";
+}
+if(isset($_POST["highest_price"])){
+    $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+    m.category, s.quantity
+    FROM menu m
+    INNER JOIN stock s ON m.dish_id = s.dish_id
+    ORDER BY m.price
+    DESC
+    ";
 
-$query2 = "SELECT m.dish_id, m.dish_name, m.price, m.description,
-m.category, s.quantity
-FROM menu m
-LEFT JOIN stock s ON m.dish_id = s.dish_id
-GROUP BY m.dish_id
-HAVING quantity < 5
-ORDER BY m.category, m.price DESC";
+}
+if(isset($_POST["lowest_price"])){
+    $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+        m.category, s.quantity
+        FROM menu m
+        INNER JOIN stock s ON m.dish_id = s.dish_id
+        ORDER BY m.price
+        ASC
+        ";
+
+}
+if(isset($_POST["lowest_stock"])){
+    $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+    m.category, s.quantity
+    FROM menu m
+    LEFT JOIN stock s ON m.dish_id = s.dish_id
+    GROUP BY m.dish_id
+    HAVING quantity < 5
+    ORDER BY  m.price DESC";
+
+}
+    // if($sort == "all"){
+    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+    //     m.category, s.quantity
+    //     FROM menu m
+    //     INNER JOIN stock s ON m.dish_id = s.dish_id
+    //     ORDER BY m.dish_id
+    //     ASC
+    //     ";
+
+    // }
+    // else if($sort=="highest_price"){
+    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+    //     m.category, s.quantity
+    //     FROM menu m
+    //     INNER JOIN stock s ON m.dish_id = s.dish_id
+    //     ORDER BY m.price
+    //     DESC
+    //     ";
+
+    // }
+    // else if ($sort == "lowest_price") {
+    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+    //     m.category, s.quantity
+    //     FROM menu m
+    //     INNER JOIN stock s ON m.dish_id = s.dish_id
+    //     ORDER BY m.price
+    //     ASC
+    //     ";
+
+    // }
+   
+    // elseif ($sort == "lowest_stock") {
+    //     $query = "SELECT m.dish_id, m.dish_name, m.price, m.description,
+    //     m.category, s.quantity
+    //     FROM menu m
+    //     LEFT JOIN stock s ON m.dish_id = s.dish_id
+    //     GROUP BY m.dish_id
+    //     HAVING quantity < 5
+    //     ORDER BY  m.price DESC";
+       
+    // }
+
+
 
 $result = mysqli_query($db, $query);
+
+
 
 ?>
 <!-- <div class="btn-group dropstart" style="margin-top: 75px; margin-left:1425px;" role="group">
@@ -31,11 +107,32 @@ $result = mysqli_query($db, $query);
       <li><a class="dropdown-item" href="#">Dropdown link</a></li>
     </ul>
 </div> -->
-<select class="form-select" style="margin-top:100px" aria-label="Default select example">
-  <option selected>Filter</option>
-  <option value="Lowest">Lowest Stock</option>
-  <option value="Highest">Highest Stock</option>
-</select>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+       
+        <select name="sort" class="form-select" style="margin-top:100px" aria-label="Default select example">
+            
+            <option selected value="all">All</option>
+            <option value="highest_price">Highest Price</option>
+            <option value="lowest_price">Lowest Price</option>
+            <option value="lowest_stock">Lowest Stock</option>
+        </select>
+        <button name="all">All</button>
+        <button name="highest_price">Highest Price</button>
+        <button name="lowest_price">Lowest Price</button>
+        <button name="lowest_stock">Lowest Stock</button>
+
+    </form>
+</body>
+</html>
 <?php
 
 // Check if there are any menu items
