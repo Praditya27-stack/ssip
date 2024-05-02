@@ -18,7 +18,6 @@ include "layout/header.php";
   <h4>Shopping Cart</h4>
   <div class="cart-container">
     <?php
-    // Assuming you have a $cart_items array containing item details
     if (isset($cart_items) && !empty($cart_items)) {
       foreach ($cart_items as $item) {
         // Extract item details
