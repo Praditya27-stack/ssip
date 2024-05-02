@@ -25,6 +25,16 @@ if (isset($_POST['add_to_cart'])) {
    
         $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = 7";
         $query_max = mysqli_query($db, "SELECT name FROM orders WHERE name = '$dish_name'");
+    $total_amount = isset($_POST['total_amount']) ? intval($_POST['total_amount']) : 1;
+    
+    // $customer_id = isset($_POST['customer_id']) ? intval($_POST['customer_id']) : null;
+    $getid=mysqli_query($db,"SELECT customer_id FROM login WHERE login_id = 0");
+    $custid=mysqli_fetch_array($getid);
+    $customer_id=$custid['customer_id'];
+
+    if ($customer_id) {
+        // Periksa apakah customer_id valid
+        $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = '$customer_id'";
         $customer_check_result = mysqli_query($db, $customer_check_query);
 
         if (mysqli_num_rows($query_max) > 0) {
