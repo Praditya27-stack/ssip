@@ -41,6 +41,8 @@ if (isset($_POST["loginBtn"])) {
             if ($data["user_type"] === 'admin') {
                 header("location: landing.php");
             } else {
+                $insertquery=$db->query("INSERT INTO login (customer_id)
+                SELECT customer_id FROM customers WHERE username ='$username'");
                 header("location: landing2.php");
             }
         } else {

@@ -27,7 +27,7 @@ if (isset($_POST["reserveBtn"])) {
         <!-- ===== BOX ICONS ===== -->
         <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
 
-        <title>Radatouli</title>
+        <title>Chef Aldi</title>
     </head>
     <body>
         <?php include 'layout/header.php';?>
