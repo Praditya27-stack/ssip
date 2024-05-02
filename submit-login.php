@@ -74,7 +74,7 @@ if (isset($_POST["loginBtn"])) {
     <i><b><?= $message ?></b></i>
 <?php } else { ?>
 <div class="login-container">
-    <form action="submit-login.php" method="POST" class="login-form bg-primary text-center p-5">
+    <form action="submit-login.php" method="POST" class="login-form  p-5">
         <h2>Login</h2>
         <?php if (!empty($message)) { ?>
             <p class="error-message"><?php echo htmlspecialchars($message); ?></p>
@@ -87,11 +87,12 @@ if (isset($_POST["loginBtn"])) {
             <label for="password">Password</label>
             <input type="password" class="form-control mt-3" id="password" name="password" required>
         </div>
-        <input type="submit" class="btn btn-secondary mt-3 px-5" name="loginBtn" value="Login"></input>
-        <p class="mt-3">Belum punya akun? <a href="register.php" class="text-light">Daftar Sekarang</a></p>
+        <div class="text-center">
+            <input type="submit" class="btn btn-primary align-center mt-3 px-5" name="loginBtn" value="Login"></input>
+        </div>
+        <p class="mt-3">Belum punya akun? <a href="register.php" class="text-dark">Daftar Sekarang</a></p>
     </form>
 </div>
 <?php } ?>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

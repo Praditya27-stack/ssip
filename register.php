@@ -17,7 +17,8 @@ if (isset($_POST["register-button"])) {
         // Check if the username already exists in the database
         $check_sql = "SELECT * FROM customers WHERE username = '$username'";
         $check_result = $db->query($check_sql);
-    
+        $message = "Username already exists.";
+
         if ($check_result && $check_result->num_rows > 0) {
             $message = "Username already exists.";
             header("location: register.php?message=" . urlencode($message));
@@ -59,6 +60,9 @@ if (isset($_POST["register-button"])) {
         <form action="register.php" method="POST" class="register-form">
             <h2>Register</h2>
             <div class="input-group">
+            <?php
+                
+                echo"<p>'$message'</p>"?>
                 <label for="name">Name</label>
                 <input type="text" id="name" name="name" required>
             </div>

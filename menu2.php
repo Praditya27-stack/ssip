@@ -23,8 +23,8 @@ if (isset($_POST['add_to_cart'])) {
     $price = $_POST['price'];
     $total_amount = 1;
    
-        $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = 7";
-        $query_max = mysqli_query($db, "SELECT name FROM orders WHERE name = '$dish_name'");
+    $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = 7";
+    $query_max = mysqli_query($db, "SELECT name FROM orders WHERE name = '$dish_name'");
     $total_amount = isset($_POST['total_amount']) ? intval($_POST['total_amount']) : 1;
     
     // $customer_id = isset($_POST['customer_id']) ? intval($_POST['customer_id']) : null;
@@ -45,7 +45,7 @@ if (isset($_POST['add_to_cart'])) {
                 VALUES (7, '$dish_name', '$price', '$total_amount')");
             }
         }
-    
+    }
 }
 ?>
 

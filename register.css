@@ -41,7 +41,7 @@
     padding: 10px;
     border: none;
     border-radius: 5px;
-    background-color: #25b3ff;
+    background-color: rgb(0, 140, 255);
     color: white;
     cursor: pointer;
     font-size: 16px;
@@ -51,5 +51,5 @@
     background-color: #195aff;
 }
 body {
-    background-color: #add8e6; /* Warna biru muda untuk latar belakang */
+    background-color: #ffff; 
 }
