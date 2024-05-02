@@ -35,7 +35,7 @@ if (isset($_POST["reserveBtn"])) {
         <!--===== home =====-->
         <section class="home" id="home">
             <div class="home__container bd-grid">
-                <h1 class="home__title"><span>RADATOULI</span></h1>
+                <h1 class="home__title"><span>Chef Aldi</span></h1>
 
                 <div class="home__scroll">
                     <a href="#reserve" class="home__scroll-link"><i class='bx bx-up-arrow-alt' ></i>Scroll down</a>
