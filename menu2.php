@@ -21,30 +21,31 @@ ORDER BY m.category, m.price DESC";
 if (isset($_POST['add_to_cart'])) {
     $dish_name = $_POST['dish_name'];
     $price = $_POST['price'];
-    $customer_id = isset($_POST['customer_id']) ? intval($_POST['customer_id']) : null;
+    $total_amount = 1;
+   
+        $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = 7";
+        $query_max = mysqli_query($db, "SELECT name FROM orders WHERE name = '$dish_name'");
     $total_amount = isset($_POST['total_amount']) ? intval($_POST['total_amount']) : 1;
+    
+    // $customer_id = isset($_POST['customer_id']) ? intval($_POST['customer_id']) : null;
+    $getid=mysqli_query($db,"SELECT customer_id FROM login WHERE login_id = 0");
+    $custid=mysqli_fetch_array($getid);
+    $customer_id=$custid['customer_id'];
 
     if ($customer_id) {
         // Periksa apakah customer_id valid
-        $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = $customer_id";
+        $customer_check_query = "SELECT customer_id FROM customers WHERE customer_id = '$customer_id'";
         $customer_check_result = mysqli_query($db, $customer_check_query);
 
-        if (mysqli_num_rows($customer_check_result) > 0) {
-            // Customer_id valid, lakukan operasi INSERT ke tabel orders
-            $insert_order_query = "INSERT INTO orders (customer_id, name, price, total_amount) 
-                                   VALUES ('$customer_id', '$dish_name', '$price', '$total_amount')";
-
-            if (mysqli_query($db, $insert_order_query)) {
-                echo "Produk berhasil ditambahkan ke keranjang.";
-            } else {
-                echo "Error: " . mysqli_error($db);
-            }
+        if (mysqli_num_rows($query_max) > 0) {
+            echo "Gabisa lagi brooo!";
         } else {
-            echo "Invalid customer selection.";
+        if (mysqli_num_rows($customer_check_result) > 0) {
+                $insert_order_query = mysqli_query($db, "INSERT INTO orders (customer_id, name, price, total_amount) 
+                VALUES (7, '$dish_name', '$price', '$total_amount')");
+            }
         }
-    } else {
-        echo "Invalid customer ID.";
-    }
+    
 }
 ?>
 
@@ -57,7 +58,7 @@ if (isset($_POST['add_to_cart'])) {
     <title>Menu</title>
 </head>
 <body>
-    <?php include "layout/header.php"; ?>
+    <?php include "layout/header2.php"; ?>
 
     <div class="menu-container">
         <?php
@@ -76,7 +77,7 @@ if (isset($_POST['add_to_cart'])) {
                         <input type="hidden" name="dish_name" value="<?= htmlspecialchars($row["dish_name"]) ?>">
                         <input type="hidden" name="price" value="<?= $row["price"] ?>">
                         <!-- Pass customer_id and total_amount dynamically from the form -->
-                        <input type="hidden" name="customer_id" value="<?= isset($_POST['customer_id']) ? htmlspecialchars($_POST['customer_id']) : '' ?>">
+                        
                         <input type="hidden" name="total_amount" value="<?= isset($_POST['total_amount']) ? htmlspecialchars($_POST['total_amount']) : '1' ?>">
                         <input type="submit" name="add_to_cart" value="Order">
                     </form>

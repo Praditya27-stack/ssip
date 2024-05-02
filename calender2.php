@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -276,11 +277,12 @@
 
             <div class="nav__home" id="nav-home">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="landing.php" class="nav__link active">home</a></li>
+                    <li class="nav__item"><a href="landing2.php" class="nav__link active">home</a></li>
                     <li class="nav__item"><a href="calender2.php" class="nav__link">Reserve</a></li>
-                    <li class="nav__item"><a href="menu.php" class="nav__link">menu</a></li>
+                    <li class="nav__item"><a href="menu2.php" class="nav__link">menu</a></li>
+                    <li class="nav__item"><a href="cart.php" class="nav__link">cart</a></li>
                     <?php
-                    // session_start();
+                    
                     if (isset($_SESSION['username'])) {
                         // Jika sudah login, tampilkan tautan Logout
                         echo '<li class="nav__item"><a href="logout.php" class="nav__link">Logout</a></li>';
