@@ -20,6 +20,24 @@ ORDER BY m.category, m.price DESC";
 
 $result = mysqli_query($db, $query);
 
+if (isset($_POST['add_to_cart'])) {
+    $dish_name = $_POST['dish_name'];
+    $price = $_POST['price'];
+    $total_amount = 1;
+    // $desc = $_POST['description'];
+    // $category = $_POST['category'];
+
+    $cart = mysqli_query($db, "SELECT * FROM `orders` WHERE name='$dish_name'");
+
+    if(mysqli_num_rows($cart) > 0){
+        $message[] = 'product already added to cart';
+     }else{
+        $insert_product = mysqli_query($db, "INSERT INTO `orders`(name, price, total_amount) VALUES('$dish_name', '$price',  '$total_amount')");
+        $message[] = 'product added to cart succesfully';
+     }
+
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +46,7 @@ $result = mysqli_query($db, $query);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="menu2.css">
     <title>Menu</title>
 </head>
 
@@ -36,38 +55,37 @@ $result = mysqli_query($db, $query);
     include "layout/header.php";
 
     if (mysqli_num_rows($result) > 0) {
-    ?>
-    <div style="text-align: center;">
-        <table border="1" class="table table-primary form-container" style="margin-top: 70px;">
-            <tr>
-                <th>Menu Name</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Quantity</th>
-                <th>Action</th>
-            </tr>
-
+        ?>
+        <div class="menu-container">
             <?php
             while ($row = mysqli_fetch_assoc($result)) {
                 $id = $row["dish_id"];
-            ?>
-                <tr>
-                    <td><?= $row["dish_name"] ?></td>
-                    <td><?= $row["price"] ?></td>
-                    <td><?= $row["description"] ?></td>
-                    <td><?= $row["category"] ?></td>
-                    <td><?= $row["quantity"] ?></td>
-                    <td><a href='menu.php?delete=$id' class='btn btn-success    '> Order </a></td>
-                </tr>
-        <?php
-            }
-        } else {
-            echo "Menunya Kosong.";
-        }
+                ?>
+                <div class="menu-item">
+                    <h2><?= $row["dish_name"] ?></h2>
+                    <p>Price: <?= $row["price"] ?></p>
+                    <p>Description: <?= $row["description"] ?></p>
+                    <p>Category: <?= $row["category"] ?></p>
+                    <p>Quantity: <?= $row["quantity"] ?></p>
+                    <form action="" method="post">
+                        <input type="hidden" name="dish_name" value="<?= $row["dish_name"] ?>">
+                        <input type="hidden" name="price" value="<?= $row["price"] ?>">
+                        <input type="hidden" name="description" value="<?= $row["description"] ?>">
+                        <input type="hidden" name="category" value="<?= $row["category"] ?>">
+                        <input type="hidden" name="quantity" value="<?= $row["quantity"] ?>">
+                        <input type="submit" name="add_to_cart" value="Order">
+                    </form>
+                </div>
 
-        ?>
-        </table>
+                    
+            <?php
+                }
+            } else {
+                echo "Menunya Kosong.";
+            }
+
+            ?>
+            </table>
         </div>
 </body>
 
